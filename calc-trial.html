@@ -16,8 +16,7 @@
 <body>
   <h1>確率が収束するための試行回数計算</h1>
   <p class="red">※は必須</p>
-  <label for="initialTrials">BTの取引回数</label>
-  <input type="number" id="initialTrials" placeholder="例: 3000">
+
 
   <label for="successRate">BTの勝率 (%)<span class="red">※</span></label>
   <input type="number" id="successRate" placeholder="例: 60">
@@ -31,7 +30,14 @@
       <option value="95" selected>95%</option>
       <option value="99">99%</option>
     </select><span class="red">※</span>
-  </label><br /><br />
+  </label>
+  <hr>
+  <p>＜補助情報（省略可）＞</p>
+  <label for="initialTrials">BTの取引回数</label>
+  <input type="number" id="initialTrials" placeholder="例: 3000">
+  <label for="rensho">平均連勝 (回)</label>
+  <input type="number" id="rensho" placeholder="例: 3">
+<br /><br />
 
   <button onclick="calculateTrials()">計算</button>
 
@@ -59,9 +65,17 @@
 
       const requiredN = Math.pow(z / margin, 2) * successRate * (1 - successRate);
       const roundedN = Math.ceil(requiredN);
+      const rensho = parseFloat(document.getElementById('rensho').value);
+      const averensho = 1/(1-successRate);
 
       document.getElementById('result').innerText =
         `勝率${successRate*100}%の成績を誤差±${margin * 100}%で信頼区間${confidence}%を満たすには、最低 ${roundedN} 回の試行が必要です。`;
+    
+      if(rensho / averensho >= 2){
+        document.getElementById('result').innerText +=`\n`;
+        document.getElementById('result').innerText +=`平均連勝から補正すると、最低試行回数は${roundedN*rensho / averensho}回になります。`;
+      }
+        
     }
   </script>
 </body>
