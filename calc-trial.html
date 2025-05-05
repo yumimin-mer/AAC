@@ -56,6 +56,10 @@
       document.getElementById('result').innerText =
         `誤差±${margin * 100}%で信頼区間${confidence}%を満たすには、最低 ${roundedN} 回の試行が必要です。`;
     }
+    if (isNaN(successRate) || isNaN(margin)) {
+    document.getElementById('result').innerText = '勝率と誤差を正しく入力してください。';
+    return;
+    }
   </script>
 </body>
 </html>
