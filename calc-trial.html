@@ -69,11 +69,11 @@
       const averensho = 1/(1-successRate);
 
       document.getElementById('result').innerText =
-        `勝率${successRate*100}%の成績を誤差±${margin * 100}%で信頼区間${confidence}%を満たすには、最低 ${roundedN} 回の試行が必要です。`;
+        `勝率${parseFloat((successRate*100).toFixed(2))}%の成績を誤差±${margin * 100}%で信頼区間${confidence}%を満たすには、最低 ${roundedN} 回の試行が必要です。`;
     
       if(rensho / averensho >= 2){
         document.getElementById('result').innerText +=`\n`;
-        document.getElementById('result').innerText +=`平均連勝から補正すると、最低試行回数は${roundedN*rensho / averensho}回になります。`;
+        document.getElementById('result').innerText +=`平均連勝から補正すると、最低試行回数は${Math.floor(roundedN*rensho / averensho)}回になります。`;
       }
         
     }
