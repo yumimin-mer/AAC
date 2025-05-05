@@ -9,17 +9,20 @@
     input { padding: 0.5em; width: 200px; }
     button { margin-top: 1em; padding: 0.6em 1em; font-size: 1em; }
     #result { margin-top: 1.5em; font-weight: bold; font-size: 1.1em; }
+    select{padding:0.5em;}
+    .red{color:red;}
   </style>
 </head>
 <body>
   <h1>確率が収束するための試行回数計算</h1>
+  <p class="red">※は必須</p>
   <label for="initialTrials">BTの取引回数</label>
   <input type="number" id="initialTrials" placeholder="例: 3000">
 
-  <label for="successRate">BTの勝率 (%)</label>
+  <label for="successRate">BTの勝率 (%)<span class="red">※</span></label>
   <input type="number" id="successRate" placeholder="例: 60">
 
-  <label for="margin">許容誤差 (%)</label>
+  <label for="margin">許容誤差 (%)<span class="red">※</span></label>
   <input type="number" id="margin" value="5">
 
   <label>信頼区間: 
@@ -27,7 +30,7 @@
       <option value="90">90%</option>
       <option value="95" selected>95%</option>
       <option value="99">99%</option>
-    </select>
+    </select><span class="red">※</span>
   </label><br /><br />
 
   <button onclick="calculateTrials()">計算</button>
@@ -58,7 +61,7 @@
       const roundedN = Math.ceil(requiredN);
 
       document.getElementById('result').innerText =
-        `誤差±${margin * 100}%で信頼区間${confidence}%を満たすには、最低 ${roundedN} 回の試行が必要です。`;
+        `勝率${successRate*100}%の成績を誤差±${margin * 100}%で信頼区間${confidence}%を満たすには、最低 ${roundedN} 回の試行が必要です。`;
     }
   </script>
 </body>
