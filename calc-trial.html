@@ -26,6 +26,7 @@
 
   <label>信頼区間: 
     <select id="confidence">
+      <option value="68.3">68.3%</option>
       <option value="90">90%</option>
       <option value="95" selected>95%</option>
       <option value="99">99%</option>
@@ -58,6 +59,7 @@
       if (confidence === 90) z = 1.645;
       else if (confidence === 95) z = 1.96;
       else if (confidence === 99) z = 2.576;
+      else if (confidence === 68.3) z = 1;
       else {
         document.getElementById('result').innerText = '信頼区間は 90, 95, 99 のいずれかで指定してください';
         return;
